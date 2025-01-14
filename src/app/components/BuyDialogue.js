@@ -27,8 +27,7 @@ export default function BuyDialogue({ setSelectedClass, selectedClass, selectedP
                                 </DialogTitle>
                                 <div className="mt-2">
                                     <p className="text-sm text-gray-500">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam laudantium explicabo pariatur
-                                        iste dolorem animi vitae error totam. At sapiente aliquam accusamus facere veritatis.
+                                        You will be re-directed to the payment site of your choosing below. Any questions or concerns about payments please contact Topher Dunlap.
                                     </p>
                                 </div>
                             </div>
