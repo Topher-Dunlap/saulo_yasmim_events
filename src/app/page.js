@@ -29,7 +29,7 @@ export default function Home() {
     }
 
     return (
-        <div className="bg-fixed bg-repeat-x bg-center object-cover inset-0 -z-10 size-full bg-[url('../../public/s_y_1.JPG')]">
+        <div className="break-before-auto bg-fixed bg-repeat-x bg-center object-cover inset-0 -z-10 size-full bg-[url('../../public/s_y_1.JPG')]">
             <div className="bg-gray-900 bg-opacity-90 flex flex-col">
                <Header
                    navigation={navigation}
