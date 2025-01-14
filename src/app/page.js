@@ -4,6 +4,22 @@ import dynamic from 'next/dynamic';
 import Header from "@/app/components/Header";
 import Title from "@/app/components/Title";
 import BuyDialogue from "@/app/components/BuyDialogue";
+import './mobile.css';
+
+const mobileFixedBg = {
+    'body:before': {
+    content: '',
+    display: 'block',
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: '-10',
+    background: 'url(`../../public/s_y_1.JPG`) no-repeat center center',
+    backgroundSize: 'cover',
+}
+};
 
 const navigation = [
     {name: 'Residency', href: '#', current: true, value: 'residency'},
@@ -29,7 +45,7 @@ export default function Home() {
     }
 
     return (
-        <div className="bg-fixed bg-center object-cover inset-0 -z-10 size-full bg-[url('../../public/s_y_1.JPG')]">
+        <div className="bg-fixed bg-centerobject-coverinset-0-z-10 size-full bg-[url('../../public/s_y_1.JPG')]">
             <div className="bg-gray-900 bg-opacity-90 flex flex-col">
                <Header
                    navigation={navigation}
