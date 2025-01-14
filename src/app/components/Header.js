@@ -23,7 +23,7 @@ export default function Header({ navigation, setEventType }) {
                             onClick={() => {
                                 setEventType(item.value)
                             }}
-                            className="inline-block p-4 sm:py-0 min-[768px]:max-[1000px]:text-1xl min-[360px]:max-[760px]:text-sm min-[200px]:max-[359px]:text-xs border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                            className="inline-block p-4 sm:py-0 min-[768px]:max-[1000px]:text-1xl min-[360px]:max-[760px]:text-sm min-[200px]:max-[359px]:text-xs border-b-2 border-transparent rounded-t-lg hover:text-gray-300 hover:border-gray-300 dark:hover:text-gray-300"
                         >
                             {item.name}
                         </a>

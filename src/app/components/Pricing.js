@@ -71,7 +71,7 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
                         <h2
                             id={tier.id}
                             className={classNames(
-                                tier.mostPopular ? 'text-purple-300' : 'text-gray-900',
+                                tier.mostPopular ? 'text-purple-300' : 'text-purple-300',
                                 'text-lg/8 font-semibold',
                             )}
                         >
@@ -117,7 +117,7 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
                         <h2
                             id={tier.id}
                             className={classNames(
-                                tier.mostPopular ? 'text-indigo-600' : 'text-gray-900',
+                                tier.mostPopular ? 'text-indigo-600' : 'text-purple-300',
                                 'text-lg/8 font-semibold',
                             )}
                         >
