@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import {
-    Radio,
-    RadioGroup,
-} from '@headlessui/react';
+import { Radio, RadioGroup } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import PropTypes from 'prop-types';
 import { PricingData } from '../pricingData/PricingData';
+import { formatNumberForUSCurrency } from '../pricingUtils';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Pricing({ eventType, setSelectedClass, setSelectedPaymentLinks }) {
+export default function PricingOptions({ eventType, setSelectedClass, setSelectedPaymentLinks, setIsClassSelected }) {
     const [event, setEvent] = useState('residency');
 
     return (
@@ -22,24 +20,24 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
                 </p>
             </div>
             {eventType === 'residency' && (
-                <>
+                <div>
                     <p className="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg font-medium text-purple-300 sm:text-xl/8">
                         Classes on Thursdays for the month of February.
                     </p>
                     <p className="mx-auto max-w-2xl text-pretty text-center text-lg font-medium text-purple-300 sm:text-xl/8">
                         7-10pm at Tapestry Dance Studio.
                     </p>
-                </>
+                </div>
             )}
             {eventType === 'weekender' && (
-                <>
+                <div>
                     <p className="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg font-medium text-indigo-600 sm:text-xl/8">
                         February 28th - March 2nd.
                     </p>
                     <p className="mx-auto max-w-2xl text-pretty text-center text-lg font-medium text-indigo-600 sm:text-xl/8">
                         More Details Soon.
                     </p>
-                </>
+                </div>
             )
             }
             <div className="mt-8 flex justify-center">
@@ -64,7 +62,7 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
                     <div
                         key={tier.id}
                         className={classNames(
-                            tier.mostPopular ? 'ring-2 ring-indigo-600' : 'ring-1 ring-gray-200',
+                            tier.mostPopular ? 'ring-2 ring-white' : 'ring-1 ring-gray-200',
                             'rounded-3xl p-8',
                         )}
                     >
@@ -78,13 +76,19 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
                             {tier.name}
                         </h2>
                         <span className="text-4xl font-semibold tracking-tight text-white">
-                    {tier.price}
-                  </span>
+                            {
+                                tier.name === 'Single Classes'
+                                    ?
+                                `${formatNumberForUSCurrency(tier.price[0])} - ${formatNumberForUSCurrency(tier.price[1])}`
+                                    :
+                                formatNumberForUSCurrency(tier.price)}
+                        </span>
                         <button
                             type="button"
                             aria-describedby={tier.id}
                             onClick={() => {
-                                setSelectedClass(true);
+                                setSelectedClass(tier);
+                                setIsClassSelected(true);
                                 setSelectedPaymentLinks(tier.paymentLinks);
                             }}
                             className={classNames(
@@ -124,12 +128,14 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
                             {tier.name}
                         </h2>
                         <span className="text-4xl font-semibold tracking-tight text-white">
-                    {tier.price}
-                  </span>
+                            {formatNumberForUSCurrency(tier.price)}
+                        </span>
                         <button
                             type="button"
                             aria-describedby={tier.id}
-                            onClick={() => setSelectedBuy(true)}
+                            onClick={() => {
+                                setIsClassSelected(true);
+                            }}
                             className={classNames(
                                 tier.mostPopular
                                     ? 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-500'
@@ -154,8 +160,9 @@ export default function Pricing({ eventType, setSelectedClass, setSelectedPaymen
     )
 };
 
-Pricing.propTypes = {
+PricingOptions.propTypes = {
     eventType: PropTypes.string,
     setSelectedClass: PropTypes.func,
     setSelectedPaymentLinks: PropTypes.func,
+    setIsClassSelected: PropTypes.func,
 };

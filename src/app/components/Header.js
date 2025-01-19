@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-import Pricing from "@/app/components/Pricing";
-
 
 export default function Header({ navigation, setEventType }) {
     return (

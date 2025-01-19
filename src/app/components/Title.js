@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Pricing from "@/app/components/Pricing";
+import PricingOptions from "@/app/components/PricingOptions";
 
 
 export default function Title({ eventType, sectionToView }) {

@@ -1,19 +1,25 @@
 'use client'
 
-import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import PropTypes from "prop-types";
+import { formatNumberForUSCurrency } from "../../pricingUtils";
 
-export default function BuyDialogue({ setSelectedClass, selectedClass, selectedPaymentLinks, setSelectedPaymentLinks}) {
-    const [open, setOpen] = useState(false);
-
+export default function BuyDialogue(
+    {
+        selectedClass,
+        selectedPaymentLinks,
+        setSelectedPaymentLinks,
+        isClassSelected,
+        setIsClassSelected
+    }
+){
     return (
-        <Dialog open={selectedClass} onClose={()=> {}} className="relative z-10">
+        <Dialog open={isClassSelected} onClose={() => {
+        }} className="relative z-10">
             <DialogBackdrop
                 transition
                 className="fixed inset-0 bg-gray-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
             />
-
             <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                 <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <DialogPanel
@@ -22,12 +28,23 @@ export default function BuyDialogue({ setSelectedClass, selectedClass, selectedP
                     >
                         <div>
                             <div className="mt-3 text-center sm:mt-5">
-                                <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
+                                <div className="sm:col-span-8 lg:col-span-7">
+                                    <button
+                                        className="rounded bg-indigo-500 px-2 py-1 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                    >
+                                        {selectedClass.name}
+                                    </button>
+                                    <h2 className="mt-3 text-3xl font-bold text-gray-900">
+                                        Total {formatNumberForUSCurrency(selectedClass.price)}
+                                    </h2>
+                                </div>
+                                <DialogTitle as="h3" className="text-base mt-6 font-semibold text-gray-900">
                                     Choose Payment Method
                                 </DialogTitle>
                                 <div className="mt-2">
                                     <p className="text-sm text-gray-500">
-                                        You will be re-directed to the payment site of your choosing below. Any questions or concerns about payments please contact Topher Dunlap.
+                                        You will be re-directed to the payment site of your choosing below. Any
+                                        questions or concerns about payments please contact Topher Dunlap.
                                     </p>
                                 </div>
                             </div>
@@ -61,7 +78,7 @@ export default function BuyDialogue({ setSelectedClass, selectedClass, selectedP
                                     type="button"
                                     data-autofocus={true}
                                     onClick={() => {
-                                        setSelectedClass(false);
+                                        setIsClassSelected(false);
                                         setSelectedPaymentLinks({});
                                     }}
                                     className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
@@ -78,9 +95,10 @@ export default function BuyDialogue({ setSelectedClass, selectedClass, selectedP
 }
 
 BuyDialogue.propTypes = {
-    setSelectedClass: PropTypes.func,
-    selectedClass: PropTypes.bool,
+    selectedClass: PropTypes.object,
     selectedPaymentLinks: PropTypes.object,
     setSelectedPaymentLinks: PropTypes.func,
+    isClassSelected: PropTypes.bool,
+    setIsClassSelected: PropTypes.func,
 };
 
