@@ -31,6 +31,10 @@ export default function Home() {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+    useEffect(() => {
         if(selectedClassQuantity > 0){
             const classLevelOptions = selectedClass.paymentLinks[selectedClassType];
             const paymentOptions = classLevelOptions[selectedClassQuantity-1]?.paymentOptions;
